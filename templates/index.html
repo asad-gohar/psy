@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin - health news</title>
+    <link rel="preload" href="../static/css/HelvNeue55_W1G.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="../static/css/HelvNeue75_W1G.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link href="../static/css/../static/css/orangeHelvetica.min.css" rel="stylesheet">
+    <link href="../static/css/orangeIcons.min.css" rel="stylesheet">
+    <link href="../static/css/boosted.min.css" rel="stylesheet" />
+    <link href="../static/css/example.css" rel="stylesheet">
+    <link rel="preconnect" href="https://code.jquery.com" crossorigin="anonymous">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+</head>
+
+<body class="d-flex flex-column h-100">
+
+    <header role="banner">
+        <nav role="navigation" class="navbar navbar-dark bg-dark navbar-expand-md" aria-label="Main navigation">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    SEB HACK
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#orange-navbar-collapse" aria-controls="orange-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+        </nav>
+    </header>
+
+    <main role="main" id="content" class="my-5">
+
+        <div id="localContainer" class="o-nav-local navbar-light">
+            <nav role="navigation" class="container-fluid" aria-label="News categories navigation">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">SEB HACK</a>
+                    </li>
+
+                </ul>
+                <!-- /.navbar-collapse -->
+            </nav>
+        </div>
+
+        <div class="container-fluid">
+            <div class="">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search Question or Answer" id="myInput" aria-label="Search">
+
+                <table id="news-table" class="table tablesorter mt-5 mb-5">
+
+
+
+
+
+
+
+                    </caption>
+                    <thead class="cf">
+                        <tr>
+                            <th scope="col" class="header">id</th>
+                            <th scope="col" class="header">Question</th>
+                            <th scope="col" class="header float-right">Answer</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {% for c in data %}
+                        <tr>
+                             <td class="align-middle" style="cursor: pointer;">
+
+                                {{c["id"]}}
+
+                            </td>
+
+                            <td class="align-middle" style="cursor: pointer;">
+
+                                {{c["answer"]}}
+
+                            </td>
+                            <td class="align-middle float-right" style="cursor: pointer;">
+                                {{c["question"]}}
+                            </td>
+
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+
+
+
+
+
+
+
+
+            </div>
+
+    </main>
+    <!--/.container-->
+    <footer role="contentcnx" class="o-footer mt-auto">
+        <div class="o-footer-bottom">
+            <div class="container-fluid">
+                <p class="my-2" style="visibility: hidden;">© Orange 2015</p>
+            </div>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script>
+        window.jQuery || document.write('<script src="../static/js/jquery-slim.min.js"><\/script>')
+    </script>
+    <script src="../static/js/boosted.bundle.min.js" integrity="sha384-IUePqiflwgg4nedJxSABHpzjVdYp30ckKYriqRfUtA6fRwxFCL/KJyMERRc3Kouu" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/jquery.tablesorter.min.js" integrity="sha384-QnFIXbEfAgO7z63b/aNzTSdSNLoNiNX/mk/Ok+NpUNMnvriWLo5cOtB0OUCAdKNu" crossorigin="anonymous"></script>
+    <script>
+        window.jQuery.tablesorter || document.write('<script src="../static/js/jquery.tablesorter.min.js"><\/script>')
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#news-table tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+    <script>
+        var page_number;
+        $(document).ready(function() {
+
+            $("#news-table").tablesorter({
+                // pass the headers argument and assing a object
+                headers: {
+                    // assign the secound column (we start counting zero)
+                    4: {
+                        // disable it by setting the property sorter to false
+                        sorter: false
+                    }
+                },
+                // manipulate the template string after is it created
+                onRenderTemplate: function(i, t) {
+                    // put a span arround the text
+                    return '<span>' + t + '</span>';
+                }
+            });
+        });
+    </script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
